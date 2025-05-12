@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iDSnake</title>
+    <style> 
+        body {
+            margin: 0;
+            background-color: #333;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            font-family: 'Arial', sans-serif;
+      }
+
+       canvas {
+            display: block;
+            background-color: #000000;
+            width: 95vw;
+            height: 95vh; 
+            margin-top: 65px;
+            margin-bottom: -10px;
+        }
+
+        p {
+            color: white;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        #game {
+            display: none;
+        }
+
+        #gameOver {
+            display: none;
+        }
+
+        #start {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: black;
+            width: 100vw;
+            height: 100vh;
+            text-align: center;
+            padding: 40px;
+            box-sizing: border-box;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        #start img {
+            width: 500px;
+            margin-bottom: 100px;
+        }
+
+        .button-container {
+            display: flex;
+            flex-direction: vertical;
+            gap: 15px;
+        }
+
+        .menuBtn {
+            background-color: #ff9800;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 20px;
+            cursor: pointer;
+            border-radius: 2px;
+        }
+
+        .menuBtn:hover {
+            background-color: #ff5722;
+        }
+
+        .menuBtn:active {
+            transform: scale(1);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .gameBtnSmall {
+            background-color: #ff9800;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            font-size: 11px;
+            cursor: pointer;
+            border-radius: 2px;
+        }
+
+        .gameBtnLarge {
+            background-color: #ff9800;
+            color: white;
+            border: none;
+            padding: 9px 17px;
+            font-size: 12px;
+            cursor: pointer;
+            border-radius: 2px;
+        }
+
+        #leaderboard {
+            display: none;
+        }
+        
+        .buttonContainerGame {
+            display: flex;  
+            gap: 15px;
+        }
+
+        #top-line {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1px;
+            background-color: #222;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 10;
+        }
+
+        #leaderboard {
+            display: none;
+            background-color: #222;
+            color: white;
+            padding: 20px;
+            text-align: left;
+            width: 300px;
+            border-radius: 5px;
+        }
+    </style>    
+</head>
+<body>
+    <div id="game">
+        <div id="top-line">
+            <div class="buttonContainerGame">
+                <button class="gameBtnSmall" onclick="showLeaderboard()">Leaderboard</button>
+                <button class="gameBtnLarge" onclick="ascend()">Ascend</button>
+                <button class="gameBtnSmall" onclick="startGame()">Restart</button>
+                <p> Score: </p>  <p id="gameScore"> 0 </p>     <p> | </p>      <p> Snake Length: </p> <p id="snakeLength"> 4 </p>    <p> | </p>    <p> Obstacles: </p> <p id="obstacleCount"> 0 </p>
+            </div>   
+        </div>
+
+        <canvas id="gameCanvas"></canvas>
+    </div>
+ 
+    <div id="start"> 
+        <img src="logo.png" alt="iDSnake">
+
+        <div class="button-container">
+            <button class="menuBtn" onclick="startGame()">Start</button>
+            <button class="menuBtn" onclick="showLeaderboard()">Leaderboard</button>
+            <button class="menuBtn" onclick="showAbout()">About</button>
+        </div>
+    </div>
+
+    <div id="leaderboard">
+        <h3>Leaderboard</h3>
+        <p><b>Highscore: </b><span id="highscore">0</span></p>
+        <h4>Top 5 Highscores:</h4>
+        <ol id="topScores">
+        </ol>
+        <h4>Last 5 Games:</h4>
+        <ul id="lastGames">
+        </ul>
+        <button class="menuBtn" onclick="showStartMenu()">Back to Menu</button>
+    </div>
+
+    <div id="gameOver">
+        <h2>Game Over!</h2>
+        <p> Score: <b id="endScore"> 0</b> </p>
+        <button class="menuBtn" onclick="startGame()">Play Again</button>
+         <br>
+         <br>
+        <button class="menuBtn" onclick="showLeaderboard()">Leaderboard</button>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
+
